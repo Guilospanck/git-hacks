@@ -78,3 +78,54 @@ When you're there:
 ```bash
 git push --force-with-lease
 ```
+
+## How to git squash/fixup
+It's mainly used to combine commits.
+
+This is usual when we do a lot of "fix" git commit messages and then it becomes a mess.
+Start by calling our well-known `git rebase -i` to some commit-id and then change from 
+"pick" to either "squash" or "fixup".
+
+The difference between them are:
+- `squash`: keeps the gix fix commit messages in the description.
+- `fixup`: forget the commit messages of the fixes and keep the original.
+
+First get the commit-id you want to rebase to:
+```bash
+ git log --all --decorate --oneline --graph
+ git rebase -i <commit-id>
+```
+Example:
+```txt
+pick 4155df1cdc7 Page Navigation View
+pick c22a3fa0c5c Render navigation partial
+pick aa0a35a867e Add styles for navigation
+pick 62e858a322 Fix a typo
+pick 5c25eb48c8 Ops another fix
+pick 7f0718efe9 Fix 2
+pick f0ffc19ef7 Argh Another fix!
+```
+
+Now if you wanna combine the fixes into `c22a3fa0c5c Render navigation partial`, you should:
+- move the fixes up so that they are right below the commit you want to keep in the end;
+- change `pick` to `squash` or `fixup` for each of the fixes.
+
+And then you'll end up with something like:
+```txt
+pick 4155df1cdc7 Page Navigation View
+pick c22a3fa0c5c Render navigation partial
+fixup 62e858a322 Fix a typo
+fixup 5c25eb48c8 Ops another fix
+fixup 7f0718efe9 Fix 2
+fixup f0ffc19ef7 Argh Another fix!
+pick aa0a35a867e Add styles for navigation
+```
+
+Save the changes and then `git push --force-with-lease`.
+
+You'll end up with:
+```txt
+pick 4155df1cdc7 Page Navigation View
+pick 96373c0bcf Render navigation partial
+pick aa0a35a867e Add styles for navigation
+```
