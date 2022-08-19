@@ -1,4 +1,4 @@
-# Some GraphQL studies and other git related stuff
+# Some Git-related hacks for the daily struggles of the developer
 
 [Git PRO related site](https://about.gitlab.com/blog/2018/06/07/keeping-git-commit-history-clean/)
 
