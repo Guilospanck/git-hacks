@@ -1,5 +1,25 @@
-# Some GraphQL studies and other stuff
+# Some GraphQL studies and other git related stuff
 
+## Git commits
+Git commits are the best friends of developers, either they are working with others or not.
+Git commits must follow a pattern and must be "atomic".
+
+Some rules of thumb:
+- Separate subject from body with a blank line
+- Limit the subject line to 50 characters
+- Capitalize the subject line
+- Do not end the subject line with a period
+- Use the imperative mood in the subject line (clean your room, close the door, take out the trash)
+    ```txt
+    if applied, this commit will ________
+    Examples:
+    if applied, this commit will clean your room
+    if applied, this commit will close the door
+    if applied, this commit will take out the trash
+    ```
+    Obs 👉🏻: Remember: Use of the imperative is important only in the subject line. You can relax this restriction when you’re writing the body.
+- Wrap the body at 72 characters
+- Use the body to explain what and why vs. how
 
 ## How to git rebase
 First, verify your `git logs`:
