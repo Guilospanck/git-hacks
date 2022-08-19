@@ -1,5 +1,7 @@
 # Some GraphQL studies and other git related stuff
 
+[Git PRO related site](https://about.gitlab.com/blog/2018/06/07/keeping-git-commit-history-clean/)
+
 ## Git commits
 Git commits are the best friends of developers, either they are working with others or not.
 Git commits must follow a pattern and must be "atomic".
@@ -129,3 +131,36 @@ pick 4155df1cdc7 Page Navigation View
 pick 96373c0bcf Render navigation partial
 pick aa0a35a867e Add styles for navigation
 ```
+
+## Restarting a git commit history
+Whenever we're working on, usually, a big project, there are some times that our git commit messages don't
+make sense.
+If you want to start from scratch while maintaning all your code, you can create a `patch`.
+
+Basically a `patch` is a box containing all your code, but that can be transported to a new location.
+
+Imagine you have a branch called `add-page-navigation`. Let's see the step-by-step to do that:
+
+1) Making sure your branch has all the changes present in the `master` and has no conflict with the same.
+    - `git rebase master` while you're in `add-page-navigation` to get all the changes from `master` to your branch;
+
+2) Creating the `patch` file:
+    ```bash
+    git diff master add-page-navigation > ~/add_page_navigation.patch
+    ```
+    Once the command is run and you don't see any errors, the patch file is generated.
+
+3) Deleting the `add-page-navigation` branch:
+    - check out to the `master` branch: `git checkout master`;
+    - delete the `add-page-navigation` branch: `git branch -D add-page-navigation`;
+
+4) Creating a new branch with the same name:
+    - while in the `master` branch, run `git checkout -b add-page-navigation`.
+    At this point this is a fresh new branch with no differences from `master` branch
+
+5) Finally, apply your changes from the patch file:
+    - while in the new created branch, run `git apply ~/add_page_navigation.patch`.
+
+6) Now commit each part of the code as you want.
+    
+    
